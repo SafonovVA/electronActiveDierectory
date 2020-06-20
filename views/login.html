@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>Active Directory Helper</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';"/>
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-  </head>
-  
- <body>
-    
-    <div class="container">
-        <br />
-        <div class="row">
-            <div class="col-md-12" align="center">
-                <img src="../resources/img/icon.png" alt="Card image">
-                
-            </div>
+    <link rel="stylesheet" href="../resources/css/login.css">
+</head>
+
+<body>
+
+<div class="container">
+    <br/>
+    <div class="row">
+        <div class="col-md-12 align-content-center">
+            <img src="../resources/img/adLoginLogo.png" alt="Card image" height="100" width="400">
         </div>
-        <br />
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <form action="users.html">
-                    <div class="input-group mb-3 input-group-sm">
-                        <input id="login-username" type="text" class="form-control" placeholder="Username">
-                        <input id="login-password" type="password" class="form-control" placeholder="Password">
-                        <div class="input-group-append">
-                            <button id="login-submit" class="btn btn-success" type="submit">Go</button>
-                        </div>
-                    </div>
-                </form>
+    </div>
+    <br/>
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="row" id="login-row">
+        <div class="col-md-8 offset-md-2  align-content-center">
+
+            <div class="input-group mb-3 input-group-sm">
+                <label for="login-url" hidden></label>
+                <input id="login-url" type="text" class="form-control" placeholder="URL">
+                <label for="login-basedn" hidden></label>
+                <input id="login-basedn" type="text" class="form-control" placeholder="BaseDN">
+            </div>
+
+            <div class="input-group mb-3 input-group-sm">
+                <label for="login-username" hidden></label>
+                <input id="login-username" type="text" class="form-control" placeholder="Username">
+                <label for="login-password" hidden></label>
+                <input id="login-password" type="password" class="form-control" placeholder="Password">
+                <div class="input-group-append">
+                    <button id="login-submit" class="btn btn-success">Go</button>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-     <script>
-       require('../resources/js/bootstrap.min.js');
-     </script>
-     <script src="../models/login.js"></script>
-
-  </body>
+<!--<script src="../resources/js/bootstrap.min.js"></script>-->
+<script>
+    require('../resources/js/bootstrap.min');
+    require('../resources/js/bootstrap-func.js');
+    require('../models/login.js');
+</script>
+</body>
 </html>
