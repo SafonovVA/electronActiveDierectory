@@ -1,0 +1,16 @@
+const path = require('path');
+
+const dirname = __dirname;
+
+module.exports = {
+    appDir: __dirname,
+    resourcesDir: path.join(__dirname, 'resources'),
+    cssDir: path.join(__dirname, 'resources', 'css'),
+    imgDir: path.join(__dirname, 'resources', 'img'),
+    viewsDir: path.join(__dirname, 'views'),
+    modelsDir: path.join(__dirname, 'models'),
+
+    url: ,
+    baseDN: ,
+    postfix: ,
+};

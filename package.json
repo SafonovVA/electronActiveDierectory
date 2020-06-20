@@ -1,0 +1,26 @@
+{
+  "name": "activedirectoryhelper",
+  "version": "1.0.0",
+  "description": "Haha",
+  "repository": {
+    "me": "asd"
+  },
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^9.0.4",
+    "eslint": "^7.2.0"
+  },
+  "dependencies": {
+    "ad": "^0.3.2",
+    "electron-store": "^5.2.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  }
+}
