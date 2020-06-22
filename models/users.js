@@ -9,18 +9,6 @@ buttonUsersGet.onclick = () => {
     const username = document.querySelector('#user-get-username').value;
     const user = username === '' ? undefined : username;
 
-    /*const receiveUsername = document.querySelector('#user-get-check-username').checked;
-    const receiveMail = document.querySelector('#user-get-check-mail').checked;
-    const receiveDisplayName = document.querySelector('#user-get-check-display-name').checked;
-    const receiveGroups = document.querySelector('#user-get-check-groups').checked;
-
-    let options = {};
-    options.fields = [];
-    receiveUsername === true ? options.fields.push('sAMAccountName') : null;
-    receiveMail === true ? options.fields.push('mail') : null;
-    receiveDisplayName === true ? options.fields.push('displayName') : null;
-    receiveGroups === true ? options.fields.push('groups') : null;*/
-
     const adConfig = ipcRenderer.sendSync('give-ad-config');
     const ad = new AD(adConfig);
 
