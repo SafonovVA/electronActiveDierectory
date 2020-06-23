@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Active Directory Helper</title>
@@ -65,7 +65,13 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
+                                        <div class="input-group-prepend"
+                                             id="user-get-label-username"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
                                             <span class="input-group-text">Username</span>
                                         </div>
                                         <input id="user-get-username" type="text" class="form-control"
@@ -75,24 +81,109 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-success btn-sm active">
-                                            <input type="checkbox" name="options" id="user-get-check-username" checked>
-                                            Username
-                                        </label>
-                                        <label class="btn btn-success btn-sm">
-                                            <input type="checkbox" name="options" id="user-get-check-mail">
-                                            Mail
-                                        </label>
-                                        <label class="btn btn-success btn-sm">
-                                            <input type="checkbox" name="options" id="user-get-check-display-name">
-                                            Display name
-                                        </label>
-                                        <label class="btn btn-success btn-sm">
-                                            <input type="checkbox" name="options" id="user-get-check-groups">
-                                            Groups
-                                        </label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend"
+                                             id="user-get-label-fields"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                            <span class="input-group-text">Fields</span>
+                                        </div>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-success btn-sm active">
+                                                <input type="checkbox" name="user-get-fields"
+                                                       id="user-get-fields-username"
+                                                       checked>
+                                                Username
+                                            </label>
+                                            <label class="btn btn-success btn-sm">
+                                                <input type="checkbox" name="user-get-fields" id="user-get-fields-mail">
+                                                Mail
+                                            </label>
+                                            <label class="btn btn-success btn-sm">
+                                                <input type="checkbox" name="user-get-fields"
+                                                       id="user-get-fields-display-name">
+                                                Display name
+                                            </label>
+                                            <label class="btn btn-success btn-sm">
+                                                <input type="checkbox" name="user-get-fields"
+                                                       id="user-get-fields-groups">
+                                                Groups
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend"
+                                             id="user-get-label-order-by"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                            <span class="input-group-text">Order by</span>
+                                        </div>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary active">
+                                                <input type="radio" name="user-get-order" id="user-get-order-username" checked> Username
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" name="user-get-order" id="user-get-order-mail"> Mail
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" name="user-get-order" id="user-get-order-display-name">
+                                                Display name
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend"
+                                             id="user-get-label-limit"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                            <span class="input-group-text" id="basic-addon3">Limit</span>
+                                        </div>
+                                        <input type="number" name="user-get-limit" id="user-get-limit" min="0"
+                                               value="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend"
+                                             id="user-get-label-output"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                            <span class="input-group-text" id="user-get-string-output">Output</span>
+                                        </div>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary active">
+                                                <input type="radio" name="user-get-output" id="user-get-output-json" checked> JSON
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" name="user-get-output" id="user-get-output-txt"> TXT
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" name="user-get-output" id="user-get-output-excel">
+                                                Excel
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -100,9 +191,7 @@
                                 <div class="col-md-12">
 
                                     <button id="button-users-get" class="btn btn-primary" type="button">
-                                        <span class="spinner-border spinner-border-sm" role="status"
-                                              aria-hidden="true"></span>
-                                        Start
+                                        <span>Start</span>
                                     </button>
                                 </div>
                             </div>
@@ -155,7 +244,10 @@
 
 <a href="#" title="Dismissible popover" data-toggle="popover" data-trigger="focus"
    data-content="Click anywhere in the document to close this popover">Click me</a>
+
 <script>
+    require('jquery');
+    require('popper.js');
     require('../resources/js/bootstrap.min.js');
     require('../resources/js/bootstrap-func.js');
     require('../models/users.js');

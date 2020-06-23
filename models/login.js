@@ -22,7 +22,7 @@ submit.onclick = () => {
 
     store.set('loginUrl', loginUrl.value);
     store.set('loginBaseDN', loginBaseDN.value);
-    store.set('loginUsername', loginUsername.value + constants.postfix);
+    store.set('loginUsername', loginUsername.value);
 
     const config = {
         url: loginUrl.value,

@@ -1,3 +1,3 @@
 ## About App
 
-Desktop AD application
+Desktop AD application made on electron.js 

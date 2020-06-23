@@ -1,7 +1,7 @@
 {
   "name": "activedirectoryhelper",
   "version": "1.0.0",
-  "description": "Haha",
+  "description": "Active Directory helper",
   "repository": {
     "me": "asd"
   },
@@ -10,16 +10,18 @@
     "start": "cd electron & electron.exe C:\\Users\\safonov_46441\\source\\repos\\electronADir\n",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Active Directory"
+  ],
+  "author": "Safonov Vladimir",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^7.2.0"
   },
   "dependencies": {
-    "activedirectory": "^0.7.2",
     "ad": "^0.3.2",
     "electron-store": "^5.2.0",
+    "exceljs": "^4.0.1",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1"
   }
