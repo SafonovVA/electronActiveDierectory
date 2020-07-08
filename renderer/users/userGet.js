@@ -31,18 +31,7 @@ buttonUsersGet.onclick = async () => {
             userGetCache.set(cacheKey, users);
         }
 
-        const nothingNotFound = users.length === 0;
-        const userNotFound = Object.keys(users[0]).length === 0;
-        if (nothingNotFound || userNotFound) {
-            if (nothingNotFound) {
-                const message = queryOptions.hasOwnProperty('limit') && queryOptions.limit[0] === 1 ? 'of the user' : 'of users';
-                ipcRenderer.send('open-info-dialog', 'User get info', `Attributes (${queryOptions.fields}) ${message} are empty`);
-            }
-            if (userNotFound) {
-                const message = queryOptions.hasOwnProperty('limit') && queryOptions.limit[0] === 1 ? 'User not found' : 'Users not found';
-                ipcRenderer.send('open-info-dialog', 'User get info', message);
-            }
-            ipcRenderer.on('hide-animation-in-button', () => hideAnimationButton(buttonUsersGet));
+        if (checkUserGetResult(users, queryOptions) === false) {
             return false;
         }
 
@@ -63,6 +52,20 @@ buttonUsersGet.onclick = async () => {
         ipcRenderer.on('hide-animation-in-button', () => hideAnimationButton(buttonUsersGet));
     }
 };
+
+function checkUserGetResult(users, queryOptions) {
+    if (users.length === 0) {
+        const message = queryOptions.hasOwnProperty('limit') && queryOptions.limit[0] === 1 ? 'of the user' : 'of users';
+        ipcRenderer.send('open-info-dialog', 'User get info', `Attributes (${queryOptions.fields}) ${message} are empty`);
+        return false;
+    }
+    if (Object.keys(users[0]).length === 0) {
+        const message = queryOptions.hasOwnProperty('limit') && queryOptions.limit[0] === 1 ? 'User not found' : 'Users not found';
+        ipcRenderer.send('open-info-dialog', 'User get info', message);
+        return false;
+    }
+    return true;
+}
 
 function convertUserGroupsToString(user) {
     return (user.groups.map(group => group.cn)).join('; ');
