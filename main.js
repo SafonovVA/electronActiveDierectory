@@ -36,7 +36,6 @@ function createLoginWindow() {
 }
 
 app.whenReady().then(createLoginWindow);
-//app.whenReady().then(createMainWindow);
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {

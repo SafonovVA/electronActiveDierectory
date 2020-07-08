@@ -7,13 +7,13 @@ const buttonUsersGet = document.querySelector('#button-users-get');
 
 buttonUsersGet.onclick = async () => {
     buttonUsersGet.insertAdjacentHTML('afterbegin', spinner);
-    const username = document.querySelector('#user-get-username').value;
-    const user = username !== '' ? username : undefined;
+    let userName = document.querySelector('#user-get-username').value;
+    userName = userName !== '' ? userName : undefined;
 
     const adConfig = ipcRenderer.sendSync('give-ad-config');
     const ad = new AD(adConfig);
     const {queryOptions, fileFormat} = optionsForUserGet();
-    const cacheKey = JSON.stringify(Object.assign({user: user}, queryOptions));
+    const cacheKey = JSON.stringify(Object.assign({userName: userName}, queryOptions));
     if (queryOptions === undefined) {
         hideAnimationButton(buttonUsersGet);
         return false;
@@ -24,34 +24,29 @@ buttonUsersGet.onclick = async () => {
         if (userGetCache.has(cacheKey)) {
             users = userGetCache.get(cacheKey);
         } else {
-            users = await ad.user(user).get(queryOptions);
+            users = await ad.user(userName).get(queryOptions);
+            users = Array.isArray((users)) ? users : [users];
             userGetCache.set(cacheKey, users);
         }
-        if (!Array.isArray(users)) {
-            users = [users];
+
+        if (Object.keys(users[0]).length === 0) {
+            const message = queryOptions.limit === 1 ? 'User not found' : 'Users not found';
+            ipcRenderer.send('open-info-dialog', 'User get info', message);
+            hideAnimationButton(buttonUsersGet);
+            return false;
         }
-        if (Object.keys(users).length || users.length) {
-            if (Array.isArray(users)) {
-                users.map(user => {
-                    if (user.hasOwnProperty('groups')) {
-                        user.groups = convertUserGroupsToString(user)
-                    }
-                });
-            } else {
-                if (users.hasOwnProperty('groups')) {
-                    users.groups = convertUserGroupsToString(users);
-                }
+
+        users.forEach(user => {
+            if (user.hasOwnProperty('groups')) {
+                user.groups = convertUserGroupsToString(user)
             }
+        });
 
-
-            const result = {
-                data: users,
-                fileName: `get-users.${fileFormat}`
-            };
-            ipcRenderer.send('save-data-as', {result, fileFormat});
-        } else {
-            ipcRenderer.send('open-info-dialog', 'User get info', 'Users not found');
-        }
+        const result = {
+            data: users,
+            fileName: `get-users.${fileFormat}`
+        };
+        ipcRenderer.send('save-data-as', {result, fileFormat});
     } catch (error) {
         ipcRenderer.send('open-error-dialog', 'get error', error.message);
     } finally {
@@ -72,31 +67,16 @@ function hideAnimationButton(button) {
 function optionsForUserGet() {
     const queryOptions = {};
 
-    const receiveUsername = document.querySelector('#user-get-fields-username').checked;
-    const receiveMail = document.querySelector('#user-get-fields-mail').checked;
-    const receiveDisplayName = document.querySelector('#user-get-fields-display-name').checked;
-    const receiveGroups = document.querySelector('#user-get-fields-groups').checked;
-    const checkingArray = [receiveUsername, receiveMail, receiveDisplayName, receiveGroups].filter(Boolean);
-    if (checkingArray.length === 0) {
+    queryOptions.fields = [];
+    const checkBoxes = document.querySelectorAll('input[name="user-get-fields"]');
+    checkBoxes.forEach(checkBox => checkBox.checked === true && queryOptions.fields.push(checkBox.value));
+    console.log(queryOptions.fields);
+    if (queryOptions.fields.length === 0) {
         ipcRenderer.send('open-error-dialog', 'Field error', 'This query must contains at least one field');
         return false;
     }
 
-    queryOptions.fields = [];
-    receiveUsername === true ? queryOptions.fields.push('sAMAccountName') : null;
-    receiveMail === true ? queryOptions.fields.push('mail') : null;
-    receiveDisplayName === true ? queryOptions.fields.push('displayName') : null;
-    receiveGroups === true ? queryOptions.fields.push('groups') : null;
-
-    const orderUsername = document.querySelector('#user-get-order-username').checked;
-    const orderMail = document.querySelector('#user-get-order-mail').checked;
-    const orderDisplayName = document.querySelector('#user-get-order-display-name').checked;
-
-    queryOptions.order = [[
-        {name: 'sAMAccountName', value: orderUsername},
-        {name: 'mail', value: orderMail},
-        {name: 'displayName', value: orderDisplayName},
-    ].filter(item => item.value === true)[0].name];
+    queryOptions.order = [document.querySelector('input[name="user-get-order"]:checked').value];
 
     if (document.querySelector('#user-get-username').value !== '') {
         queryOptions.limit = [1];
@@ -110,15 +90,7 @@ function optionsForUserGet() {
         }
     }
 
-    const fileFormatJson = document.querySelector('#user-get-output-json').checked;
-    const fileFormatTxt = document.querySelector('#user-get-output-txt').checked;
-    const fileFormatExcel = document.querySelector('#user-get-output-excel').checked;
-
-    const fileFormat = [
-        {name: 'json', value: fileFormatJson},
-        {name: 'txt', value: fileFormatTxt},
-        {name: 'xlsx', value: fileFormatExcel},
-    ].filter(item => item.value === true)[0].name;
+    const fileFormat = document.querySelector('input[name="user-get-output"]:checked').value;
 
     return {queryOptions, fileFormat};
 }
