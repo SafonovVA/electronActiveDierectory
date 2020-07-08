@@ -1,13 +1,8 @@
-/*const {app, BrowserWindow, ipcMain, dialog} = require('electron');
+const {app, BrowserWindow, ipcMain, dialog} = require('electron');
 const path = require('path');
-const constants = require('./appConfig');
-const fs = require('fs');*/
-require('./main/commonIpc');
-/*
-
+const constants = require('../appConfig');
 
 let loginWindow;
-
 function createLoginWindow() {
     loginWindow = new BrowserWindow({
         width: 440,
@@ -61,22 +56,23 @@ ipcMain.on('create-ad-config', (event, config) => {
 
 ipcMain.on('open-error-dialog', (event, ...message) => {
     dialog.showErrorBox(message[0], message[1]);
+    event.reply('hide-animation-in-button');
 });
 ipcMain.on('open-info-dialog', (event, ...message) => {
-
     dialog.showMessageBox({
         type: 'info',
         buttons: ['Ok'],
         title: message[0],
         message: message[1],
     });
+    event.reply('hide-animation-in-button');
 });
 
 ipcMain.on('give-ad-config', event => event.returnValue = adConfig);
 
 ipcMain.on('give-path-to-desktop', event => event.returnValue = app.getPath('desktop'));
 
-/!*async function writeFile(data, fileFormat, usersPath) {
+/*async function writeFile(data, fileFormat, usersPath) {
     switch (fileFormat) {
         case 'txt':
             let text = '';
@@ -151,7 +147,7 @@ ipcMain.on('give-path-to-desktop', event => event.returnValue = app.getPath('des
                 console.log(JSON.stringify(error, null, 4));
             }
     }
-}*!/
+}*/
 
 ipcMain.on('save-data-as', async (event, {result, fileFormat}) => {
 
@@ -167,7 +163,7 @@ ipcMain.on('save-data-as', async (event, {result, fileFormat}) => {
         event.reply('hide-animation-in-button');
         return false;
     }
-    const {writeFile} = require('./libs/fileSaver');
+    const {writeFile} = require('../libs/fileSaver');
     await writeFile(result.data, fileFormat, usersPath);
     event.reply('hide-animation-in-button');
 });
@@ -197,24 +193,4 @@ function createMainWindow() {
 
     usersWindow.webContents.openDevTools();
 }
-*/
 
-/*function createResultWindow(result) {
-    const resultWindow = new BrowserWindow({
-        width: 1000,//440
-        height: 600,//225
-        frame: true,
-        icon: path.join(constants.imgResDir, 'icon.png'),
-        webPreferences: {
-            nodeIntegration: true
-        },
-    });
-
-    resultWindow.loadFile(path.join(constants.viewsDir, 'users.html'));
-
-    resultWindow.once('ready-to-show', () => {
-        resultWindow.show();
-    });
-
-    resultWindow.webContents.openDevTools();
-}*/

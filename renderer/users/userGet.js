@@ -13,7 +13,9 @@ buttonUsersGet.onclick = async () => {
     const adConfig = ipcRenderer.sendSync('give-ad-config');
     const ad = new AD(adConfig);
     const {queryOptions, fileFormat} = optionsForUserGet();
+
     const cacheKey = JSON.stringify(Object.assign({userName: userName}, queryOptions));
+
     if (queryOptions === undefined) {
         hideAnimationButton(buttonUsersGet);
         return false;
@@ -29,10 +31,18 @@ buttonUsersGet.onclick = async () => {
             userGetCache.set(cacheKey, users);
         }
 
-        if (Object.keys(users[0]).length === 0) {
-            const message = queryOptions.limit === 1 ? 'User not found' : 'Users not found';
-            ipcRenderer.send('open-info-dialog', 'User get info', message);
-            hideAnimationButton(buttonUsersGet);
+        const nothingNotFound = users.length === 0;
+        const userNotFound = Object.keys(users[0]).length === 0;
+        if (nothingNotFound || userNotFound) {
+            if (nothingNotFound) {
+                const message = queryOptions.hasOwnProperty('limit') && queryOptions.limit[0] === 1 ? 'of the user' : 'of users';
+                ipcRenderer.send('open-info-dialog', 'User get info', `Attributes (${queryOptions.fields}) ${message} are empty`);
+            }
+            if (userNotFound) {
+                const message = queryOptions.hasOwnProperty('limit') && queryOptions.limit[0] === 1 ? 'User not found' : 'Users not found';
+                ipcRenderer.send('open-info-dialog', 'User get info', message);
+            }
+            ipcRenderer.on('hide-animation-in-button', () => hideAnimationButton(buttonUsersGet));
             return false;
         }
 
@@ -70,9 +80,9 @@ function optionsForUserGet() {
     queryOptions.fields = [];
     const checkBoxes = document.querySelectorAll('input[name="user-get-fields"]');
     checkBoxes.forEach(checkBox => checkBox.checked === true && queryOptions.fields.push(checkBox.value));
-    console.log(queryOptions.fields);
     if (queryOptions.fields.length === 0) {
         ipcRenderer.send('open-error-dialog', 'Field error', 'This query must contains at least one field');
+        ipcRenderer.on('hide-animation-in-button', () => hideAnimationButton(buttonUsersGet));
         return false;
     }
 
@@ -82,10 +92,10 @@ function optionsForUserGet() {
         queryOptions.limit = [1];
     } else {
         const userLimit = document.querySelector('#user-get-limit').value;
-        if (!userLimit || userLimit < 0) {
+        if (+userLimit < 0) {
             ipcRenderer.send('open-error-dialog', 'Invalid number', 'Invalid user limit number');
             return false;
-        } else if (userLimit > 0) {
+        } else if (+userLimit > 0) {
             queryOptions.limit = [userLimit];
         }
     }
