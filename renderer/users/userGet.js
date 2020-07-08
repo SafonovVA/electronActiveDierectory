@@ -1,6 +1,7 @@
 const {ipcRenderer} = require('electron');
 const AD = require('ad');
 const spinner = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+let userGetCache = new Map();
 
 const buttonUsersGet = document.querySelector('#button-users-get');
 
@@ -12,21 +13,24 @@ buttonUsersGet.onclick = async () => {
     const adConfig = ipcRenderer.sendSync('give-ad-config');
     const ad = new AD(adConfig);
     const {queryOptions, fileFormat} = optionsForUserGet();
-    console.log(fileFormat)
+    const cacheKey = JSON.stringify(Object.assign({user: user}, queryOptions));
     if (queryOptions === undefined) {
         hideAnimationButton(buttonUsersGet);
         return false;
     }
+
     try {
-        let users = await ad.user(user).get(queryOptions);
+        let users;
+        if (userGetCache.has(cacheKey)) {
+            users = userGetCache.get(cacheKey);
+        } else {
+            users = await ad.user(user).get(queryOptions);
+            userGetCache.set(cacheKey, users);
+        }
         if (!Array.isArray(users)) {
             users = [users];
         }
         if (Object.keys(users).length || users.length) {
-            console.log(Object.keys(users).length);
-            console.log(users.length);
-
-
             if (Array.isArray(users)) {
                 users.map(user => {
                     if (user.hasOwnProperty('groups')) {
