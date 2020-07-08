@@ -8,7 +8,7 @@ module.exports = {
     cssDir: path.join(__dirname, 'resources', 'css'),
     imgDir: path.join(__dirname, 'resources', 'img'),
     viewsDir: path.join(__dirname, 'views'),
-    modelsDir: path.join(__dirname, 'models'),
+    rendererDir: path.join(__dirname, 'renderer'),
 
     url: ,
     baseDN: ,
