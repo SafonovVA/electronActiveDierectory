@@ -83,7 +83,9 @@ async function writeFile(data, fileFormat, usersPath) {
     switch (fileFormat) {
         case 'txt':
         case 'json':
-            fs.writeFile(usersPath, JSON.stringify(data, null, 4), err => {
+            fs.writeFile(usersPath, JSON.stringify(data, null, 4)
+                                        .replace(/sAMAccountName/gim, 'username')
+                                        .replace(/displayName/gim, 'display name'), err => {
                 if (err) {
                     throw err;
                 }
