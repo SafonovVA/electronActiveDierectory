@@ -17,6 +17,4 @@ document.addEventListener('DOMContentLoaded', () => {
         themeStyle.href = storage.get('theme');
         themeSelector.checked = currentTheme.includes('dark');
     }
-
-
 });

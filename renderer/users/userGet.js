@@ -1,6 +1,3 @@
-require('./common');
-require('../renderer/users/userGet');
-/*
 const {ipcRenderer} = require('electron');
 const AD = require('ad');
 const spinner = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
@@ -122,4 +119,3 @@ function optionsForUserGet() {
     return {queryOptions, fileFormat};
 }
 
-*/

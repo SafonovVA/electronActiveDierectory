@@ -1,5 +1,4 @@
 const {app, BrowserWindow, ipcMain, dialog} = require('electron');
-const url = require('url');
 const path = require('path');
 const constants = require('./appConfig');
 const fs = require('fs');
@@ -136,7 +135,7 @@ async function writeFile(data, fileFormat, usersPath) {
                     default:
                         console.log(JSON.stringify(error, null, 4) + '\n' + error.message);
                 }
-
+                console.log(JSON.stringify(error, null, 4));
             }
     }
 }
@@ -185,7 +184,7 @@ function createMainWindow() {
     usersWindow.webContents.openDevTools();
 }
 
-function createResultWindow(result) {
+/*function createResultWindow(result) {
     const resultWindow = new BrowserWindow({
         width: 1000,//440
         height: 600,//225
@@ -203,4 +202,4 @@ function createResultWindow(result) {
     });
 
     resultWindow.webContents.openDevTools();
-}
+}*/
