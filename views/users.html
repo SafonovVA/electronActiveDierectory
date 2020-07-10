@@ -64,7 +64,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-2">
                                         <div class="input-group-prepend w-25"
                                              id="user-get-label-username"
                                              data-placement="top"
@@ -81,7 +81,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-2">
                                         <div class="input-group-prepend w-25"
                                              id="user-get-label-fields"
                                              data-placement="top"
@@ -99,7 +99,8 @@
                                                 Username
                                             </label>
                                             <label class="btn btn-success">
-                                                <input type="checkbox" name="user-get-fields" id="user-get-fields-mail" value="mail">
+                                                <input type="checkbox" name="user-get-fields" id="user-get-fields-mail"
+                                                       value="mail">
                                                 Mail
                                             </label>
                                             <label class="btn btn-success">
@@ -118,7 +119,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-2">
                                         <div class="input-group-prepend w-25"
                                              id="user-get-label-order-by"
                                              data-placement="top"
@@ -134,7 +135,8 @@
                                                        value="sAMAccountName" checked> Username
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="user-get-order" id="user-get-order-mail" value="mail"> Mail
+                                                <input type="radio" name="user-get-order" id="user-get-order-mail"
+                                                       value="mail"> Mail
                                             </label>
                                             <label class="btn btn-secondary">
                                                 <input type="radio" name="user-get-order"
@@ -147,7 +149,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-2">
                                         <div class="input-group-prepend w-25"
                                              id="user-get-label-limit"
                                              data-placement="top"
@@ -165,7 +167,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-2">
                                         <div class="input-group-prepend w-25"
                                              id="user-get-label-output"
                                              data-placement="top"
@@ -182,10 +184,12 @@
                                                        value="json" checked> JSON
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="user-get-output" id="user-get-output-txt" value="txt"> TXT
+                                                <input type="radio" name="user-get-output" id="user-get-output-txt"
+                                                       value="txt"> TXT
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="user-get-output" id="user-get-output-excel" value="xlsx">
+                                                <input type="radio" name="user-get-output" id="user-get-output-excel"
+                                                       value="xlsx">
                                                 Excel
                                             </label>
                                         </div>
@@ -194,8 +198,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button id="button-users-get" class="btn btn-primary float-right" type="button">
-                                        <span>Start</span>
+                                    <button id="button-user-get" class="btn btn-primary float-right" type="button">
+                                        <span>Get result</span>
                                     </button>
                                 </div>
                             </div>
@@ -211,13 +215,158 @@
                                     data-target="#collapseTwo"
                                     aria-expanded="false"
                                     aria-controls="collapseTwo">
-                                <span>Get user group</span>
+                                <span>Create new user</span>
                             </button>
                         </h2>
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                         <div class="card-body">
-                            <span>Get user group</span>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend w-25"
+                                             id="user-add-username-label"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                                <span class="input-group-text w-100">Username<span
+                                                        class="text-danger">*</span></span>
+                                        </div>
+                                        <input id="user-add-username" type="text" class="form-control w-75"
+                                               placeholder="user_11111">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend w-25"
+                                             id="user-add-common-name-label"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                                <span class="input-group-text w-100">Common name<span
+                                                        class="text-danger">*</span></span>
+                                        </div>
+                                        <input id="user-add-common-name" type="text" class="form-control w-75"
+                                               placeholder="Some User">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend w-25"
+                                             id="user-add-password-label"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                                <span class="input-group-text w-100">Password<span
+                                                        class="text-danger">*</span></span>
+                                        </div>
+                                        <input id="user-add-password" type="text" class="form-control w-75"
+                                               placeholder="123qwe!">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend w-25"
+                                             id="user-add-mail-label"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                            <span class="input-group-text w-100">Email</span>
+                                        </div>
+                                        <input id="user-add-mail" type="text" class="form-control w-75"
+                                               placeholder="email@mail.mail">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend w-25"
+                                             id="user-add-first-name-label"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                            <span class="input-group-text w-100">First name</span>
+                                        </div>
+                                        <input id="user-add-first-name" type="text" class="form-control w-75"
+                                               placeholder="Some">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend w-25"
+                                             id="user-add-last-name-label"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                            <span class="input-group-text w-100">Last name</span>
+                                        </div>
+                                        <input id="user-add-last-name" type="text" class="form-control w-75"
+                                               placeholder="User">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend w-25"
+                                             id="user-add-title-label"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                            <span class="input-group-text w-100">Title</span>
+                                        </div>
+                                        <input id="user-add-title" type="text" class="form-control w-75"
+                                               placeholder="title">
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!--<div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend w-25"
+                                             id="user-add-location-label"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                            <span class="input-group-text w-100">Location</span>
+                                        </div>
+                                        <input id="user-add-location" type="text" class="form-control w-75"
+                                               placeholder="All">
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button id="button-user-add" class="btn btn-primary float-right" type="button">
+                                        <span>Create user</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -254,7 +403,7 @@
     require('popper.js');
     require('../resources/js/bootstrap.min.js');
     require('../resources/js/bootstrap-func.js');
-    require('../renderer/users/userGet');
+    require('../renderer/users/commonUser');
 </script>
 </body>
 </html>

@@ -3,12 +3,30 @@ const {ipcRenderer} = require('electron');
 const AD = require('ad');
 const spinner = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
 let userGetCache = new Map();
+const userNameField = document.querySelector('#user-get-username');
+const userLimitField = document.querySelector('#user-get-limit');
 
-const buttonUsersGet = document.querySelector('#button-users-get');
+const buttonUsersGet = document.querySelector('#button-user-get');
+
+userNameField.oninput = async () => {
+    if (userNameField.value === '') {
+        userLimitField.disabled = false;
+    } else {
+        userLimitField.disabled = true;
+        userLimitField.value = 1;
+    }
+};
+
+userLimitField.oninput = async () => {
+    if (userLimitField.value < 0) {
+        userLimitField.value *= -1;
+    }
+}
+
 
 buttonUsersGet.onclick = async () => {
     buttonUsersGet.insertAdjacentHTML('afterbegin', spinner);
-    let userName = document.querySelector('#user-get-username').value;
+    let userName = userNameField.value;
     userName = userName !== '' ? userName : undefined;
 
     const adConfig = ipcRenderer.sendSync('give-ad-config');
@@ -32,7 +50,7 @@ buttonUsersGet.onclick = async () => {
             userGetCache.set(cacheKey, users);
         }
 
-        if (checkUserGetResult(users, queryOptions) === false) {
+        if (!checkUserGetResult(users, queryOptions)) {
             return false;
         }
 
@@ -56,11 +74,17 @@ buttonUsersGet.onclick = async () => {
 
 function checkUserGetResult(users, queryOptions) {
     if (users.length === 0) {
+        console.log(users)
         const message = queryOptions.hasOwnProperty('limit') && queryOptions.limit[0] === 1 ? 'of the user' : 'of users';
         ipcRenderer.send('open-info-dialog', 'User get info', `Attributes (${queryOptions.fields}) ${message} are empty`);
         return false;
     }
+    if (users[0] === undefined) {
+        ipcRenderer.send('open-info-dialog', 'User get info', `Current user has "${queryOptions.fields}" attribute empty`);
+        return false;
+    }
     if (Object.keys(users[0]).length === 0) {
+        console.log(queryOptions.limit[0] === 1)
         const message = queryOptions.hasOwnProperty('limit') && queryOptions.limit[0] === 1 ? 'User not found' : 'Users not found';
         ipcRenderer.send('open-info-dialog', 'User get info', message);
         return false;
@@ -92,16 +116,8 @@ function optionsForUserGet() {
 
     queryOptions.order = [document.querySelector('input[name="user-get-order"]:checked').value];
 
-    if (document.querySelector('#user-get-username').value !== '') {
-        queryOptions.limit = [1];
-    } else {
-        const userLimit = document.querySelector('#user-get-limit').value;
-        if (+userLimit < 0) {
-            ipcRenderer.send('open-error-dialog', 'Invalid number', 'Invalid user limit number');
-            return false;
-        } else if (+userLimit > 0) {
-            queryOptions.limit = [userLimit];
-        }
+    if (+(userLimitField.value) > 0) {
+        queryOptions.limit = [+(userLimitField.value)];
     }
 
     const fileFormat = document.querySelector('input[name="user-get-output"]:checked').value;
