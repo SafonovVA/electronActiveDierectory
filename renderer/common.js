@@ -1,6 +1,7 @@
 const storage = new (require('electron-store'))();
 const themeSelector = document.querySelector('#theme-select');
 const themeStyle = document.querySelector('#theme-style');
+
 const themeStyleLink = {
     light: '../resources/css/light.bootstrap.min.css',
     dark: '../resources/css/dark.bootstrap.min.css'

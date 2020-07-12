@@ -56,7 +56,7 @@ ipcMain.on('create-ad-config', (event, config) => {
 
 ipcMain.on('open-error-dialog', (event, ...message) => {
     dialog.showErrorBox(message[0], message[1]);
-    event.reply('hide-animation-in-button');
+    //event.reply('hide-animation-in-button');
 });
 ipcMain.on('open-info-dialog', (event, ...message) => {
     dialog.showMessageBox({
@@ -65,7 +65,7 @@ ipcMain.on('open-info-dialog', (event, ...message) => {
         title: message[0],
         message: message[1],
     });
-    event.reply('hide-animation-in-button');
+    //event.reply('hide-animation-in-button');
 });
 
 ipcMain.on('give-ad-config', event => event.returnValue = adConfig);
@@ -83,12 +83,12 @@ ipcMain.on('save-data-as', async (event, {result, fileFormat}) => {
         }// ?
     });
     if (usersPath === undefined) {
-        event.reply('hide-animation-in-button');
+        //event.reply('hide-animation-in-button');
         return false;
     }
     const {writeFile} = require('../libs/fileSaver');
     await writeFile(result.data, fileFormat, usersPath);
-    event.reply('hide-animation-in-button');
+    //event.reply('hide-animation-in-button');
 });
 
 ipcMain.on('authentication-success', (event) => {

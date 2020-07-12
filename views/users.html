@@ -8,7 +8,7 @@
     <link id="theme-style" rel="stylesheet" href="../resources/css/light.bootstrap.min.css">
 </head>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="50" position="relative">
+<body data-spy="scroll" data-target=".navbar" data-offset="50"><!--position="relative"-->
 <!-- Grey with black text -->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
     <a class="navbar-brand" href="#">
@@ -45,7 +45,7 @@
         <div class="col-md-12">
 
             <div class="accordion" id="accordionExample">
-                <div class="card">
+                <div class="card" id="user-get-div">
                     <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
                             <button class="btn btn-link "
@@ -64,6 +64,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
+                                    <label for="user-get-username"></label>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend w-25"
                                              id="user-get-label-username"
@@ -149,6 +150,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
+                                    <label for="user-get-limit"></label>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend w-25"
                                              id="user-get-label-limit"
@@ -206,7 +208,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" id="user-add-div">
                     <div class="card-header" id="headingTwo">
                         <h2 class="mb-0">
                             <button class="btn btn-link collapsed"
@@ -222,6 +224,7 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                         <div class="card-body">
                             <div class="row">
+                                <label for="user-add-username"></label>
                                 <div class="col-md-12">
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend w-25"
@@ -239,7 +242,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!--<div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend w-25"
@@ -256,44 +259,10 @@
                                                placeholder="Some User">
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend w-25"
-                                             id="user-add-password-label"
-                                             data-placement="top"
-                                             data-toggle="popover"
-                                             data-trigger="hover"
-                                             data-container="body"
-                                             data-content="Some instructions">
-                                                <span class="input-group-text w-100">Password<span
-                                                        class="text-danger">*</span></span>
-                                        </div>
-                                        <input id="user-add-password" type="text" class="form-control w-75"
-                                               placeholder="123qwe!">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend w-25"
-                                             id="user-add-mail-label"
-                                             data-placement="top"
-                                             data-toggle="popover"
-                                             data-trigger="hover"
-                                             data-container="body"
-                                             data-content="Some instructions">
-                                            <span class="input-group-text w-100">Email</span>
-                                        </div>
-                                        <input id="user-add-mail" type="text" class="form-control w-75"
-                                               placeholder="email@mail.mail">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                                    <label for="user-add-first-name"></label>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend w-25"
                                              id="user-add-first-name-label"
@@ -311,6 +280,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
+                                    <label for="user-add-last-name"></label>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend w-25"
                                              id="user-add-last-name-label"
@@ -323,6 +293,43 @@
                                         </div>
                                         <input id="user-add-last-name" type="text" class="form-control w-75"
                                                placeholder="User">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="user-add-password"></label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend w-25"
+                                             id="user-add-password-label"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                                <span class="input-group-text w-100">Password<span
+                                                        class="text-danger">*</span></span>
+                                        </div>
+                                        <input id="user-add-password" type="password" class="form-control w-75"
+                                               placeholder="123qwe!">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="user-add-mail"></label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend w-25"
+                                             id="user-add-mail-label"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                            <span class="input-group-text w-100">Email</span>
+                                        </div>
+                                        <input id="user-add-mail" type="text" class="form-control w-75"
+                                               placeholder="email@mail.mail">
                                     </div>
                                 </div>
                             </div>
@@ -370,7 +377,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" id="user-exist-div">
                     <div class="card-header" id="headingThree">
                         <h2 class="mb-0">
                             <button class="btn btn-link collapsed"
@@ -379,14 +386,51 @@
                                     data-target="#collapseThree"
                                     aria-expanded="false"
                                     aria-controls="collapseThree">
-                                <span>Get something</span>
+                                <span>Check for user existence</span>
                             </button>
                         </h2>
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                          data-parent="#accordionExample">
                         <div class="card-body">
-                            <span>Get something</span>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="user-exist-username"></label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend w-25"
+                                             id="user-exist-username-label"
+                                             data-placement="top"
+                                             data-toggle="popover"
+                                             data-trigger="hover"
+                                             data-container="body"
+                                             data-content="Some instructions">
+                                                <span class="input-group-text w-100">Username<span
+                                                        class="text-danger">*</span></span>
+                                        </div>
+                                        <input id="user-exist-username" type="text" class="form-control w-75"
+                                               placeholder="user_11111">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="user-exist-result"></label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Result" id="user-exist-result" disabled>
+                                        <div class="input-group-append">
+                                            <button id="button-user-exist" class="btn btn-success" type="submit">Go</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="col-md-6">
+                                    <span id="user-exist-result">1</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="button">
+                                        <span>Check user existing</span>
+                                    </button>
+                                </div>-->
+                            </div>
                         </div>
                     </div>
                 </div>

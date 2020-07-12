@@ -17,9 +17,15 @@ buttonUsersAdd.onclick = async () => {
         ipcRenderer.send('open-info-dialog', 'User successfully created', JSON.stringify(newUser, null, 4));
 
     } catch (error) {
-        ipcRenderer.send('open-info-dialog', 'User add error', error.message);
+        // TODO scverr dsid-031a1254 problem 5003 (will_not_perform)
+        if (error.message.includes(1254)) {
+            ipcRenderer.send('open-info-dialog', 'User add error', 'You do not have permissions or password is not valid');
+        } else {
+            ipcRenderer.send('open-info-dialog', 'User add error', error.message);
+        }
+
     } finally {
-        ipcRenderer.on('hide-animation-in-button', () => hideAnimationButton(buttonUsersAdd));
+        hideAnimationButton(buttonUsersAdd);
     }
 
 
@@ -71,10 +77,10 @@ function hideAnimationButton(button) {
 function optionsForUserAdd() {
 
     const userName = checkNodeIsEmpty(document.querySelector('#user-add-username'));
-    const commonName = checkNodeIsEmpty(document.querySelector('#user-add-common-name'));
-    const pass = checkNodeIsEmpty(document.querySelector('#user-add-password'));
+    //const commonName = checkNodeIsEmpty(document.querySelector('#user-add-common-name'));
+    const password = checkNodeIsEmpty(document.querySelector('#user-add-password'));
 
-    const requiredFields = [userName, commonName, pass];
+    const requiredFields = [userName, /*commonName,*/ password];
     for (let field of requiredFields) {
         if (!field) {
             throw new Error('Fill all required fields');
@@ -86,7 +92,7 @@ function optionsForUserAdd() {
     const lastName = document.querySelector('#user-add-last-name').value;
 
 
-    return {userName, commonName, pass, email, firstName, lastName};
+    return {userName, /*commonName,*/ password, email, firstName, lastName};
 }
 
 function checkNodeIsEmpty(node) {

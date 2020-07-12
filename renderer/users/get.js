@@ -68,7 +68,7 @@ buttonUsersGet.onclick = async () => {
     } catch (error) {
         ipcRenderer.send('open-error-dialog', 'get error', error.message);
     } finally {
-        ipcRenderer.on('hide-animation-in-button', () => hideAnimationButton(buttonUsersGet));
+        hideAnimationButton(buttonUsersGet);
     }
 };
 
